@@ -61,34 +61,55 @@ alert('Welcome to the Person Search App!');
 console.log('persons[0].name --->', persons[0].name);
 console.log('persons.length', persons.length);
 
-// function searchPerson(name) {
-//     console.log('name --->', name);
-//     let verif = false;
-//     // Tant  que le nom n'est pas trouvé dans le tableau persons on continue de demander à l'utilisateur de saisir un nom
-//     while (verif == false) {
-//         // On parcourt le tableau persons pour vérifier si le nom saisi par l'utilisateur existe dans le tableau
-//         for (let i = 0; i < persons.length; i++) {
-//             // Si le nom saisi par l'utilisateur existe dans le tableau, on retourne l'objet correspondant
-//             if (persons[i].name == name) {
-//                 verif = true;
-//                 return persons[i];
-//             } else {
-//                 alert('No results found for ' + name);
-//             }
+// Function that searches for a person in the persons array and returns the person object if found or not found if not found
+function searchPerson(name) {
+    console.log('name --->', name);
+    let verif = false;
+    // Tant  que le nom n'est pas trouvé dans le tableau persons on continue de demander à l'utilisateur de saisir un nom
+    while (verif == false) {
+        // On parcourt le tableau persons pour vérifier si le nom saisi par l'utilisateur existe dans le tableau
+        for (let i = 0; i < persons.length; i++) {
+            // Si le nom saisi par l'utilisateur existe dans le tableau, on retourne l'objet correspondant
+            if (persons[i].name == name) {
+                verif = true;
+                return persons[i];
+            } else {
+                alert('No results found for ' + name);
+            }
 
-//         }
-//     }
-// }
-
-// var person = searchPerson(prompt('Enter a name'));
-// console.log('person --->', person);
+        }
+    }
+}
 
 
+
+// Function that searches for a person in the persons array and returns an array of all the matches found
+function searchPerson(name, persons) {
+    console.log('name --->', name);
+    var newArr = [];
+
+    for (let i = 0; i < persons.length; i++) {
+        if (persons[i].name.toLowerCase().includes(name.toLowerCase())) {
+            newArr.push(persons[i]);
+        }
+        console.log('newArr --->', newArr);
+    }
+    return newArr;
+
+}
+
+var ret = searchPerson(prompt('Enter a name'), persons);
+
+console.log('ret --->', ret);
+
+// Function that searches for a person in the persons array and returns the person object if found or asks the user for another name if not found
 function searchPerson(name, persons) {
     console.log('name --->', name);
 
     for (let i = 0; i < persons.length; i++) {
-        if (persons[i].name === name) {
+        if (
+            persons[i].name.toLowerCase() === name.toLowerCase()
+        ) {
             return persons[i];
         }
     }
@@ -98,8 +119,5 @@ function searchPerson(name, persons) {
 
     // Recursively call the function with the new name and the same persons array
     return searchPerson(newName, persons);
+
 }
-
-var ret = searchPerson(prompt('Enter a name'), persons);
-
-console.log('ret --->', ret);
